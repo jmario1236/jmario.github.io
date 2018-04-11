@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<head>
+    <style>
+        #mapa{
+            width: 500px;
+            height: 500px;
+            float:left;
+            background: green;
+        }
+        #infor{
+            width: 500px;
+            height: 500px;
+            float:left;
+        }
+    </style>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu0XsvMO7mFVrasmfq5m7xd0eSOtWwy4Q&callback=initMap" async defer></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
+<script src="js/main.js"></script>
+</head>
+<body>
+    <div id="mapa">
+        
+    </div>
+    <div id="infor">
+        <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Agregar puntos
+                  </button>
+                </h5>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form id="formulario">
+                        <table>
+                            <tr>
+                                <td>Título</td>
+                                <td><input type="text" class="form-control" id="titulo" name="titulo" autocomplete="off"/></td>
+                            </tr>
+                            <tr>
+                                <td>Coordenada X</td>
+                                <td><input type="text" class="form-control" readonly id="cx"  name="cx" autocomplete="off"/></td>
+                            </tr>
+                            <tr>
+                                <td>Coordenada Y</td>
+                                <td><input type="text" class="form-control"  readonly id="cy" name="cy" autocomplete="off"/></td>
+                            </tr>
+                            
+                            <tr>
+                                <td></td>
+                                <td><span id="loader_grabar" class=""></span></td>
+                            </tr>
+                            <tr>
+                                <td><button type="button" id="btn_grabar" class="btn btn-success btn-sm">Grabar</button></td>
+                                <td><button type="button" class="btn btn-danger btn-sm">Cancelar</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Administrar puntos
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <form id="formulario_eliminar">
+                        <input type="hidden" class="form-control"  name="id" value=""/>
+                          <table>
+                              <tr>
+                                  <td>Título</td>
+                                  <td><input type="text" class="form-control"  name="titulo" autocomplete="off"/></td>
+                              </tr>
+                              <tr>
+                                  <td>Coordenada X</td>
+                                  <td><input type="text" class="form-control" readonly  name="cx" autocomplete="off"/></td>
+                              </tr>
+                              <tr>
+                                  <td>Coordenada Y</td>
+                                  <td><input type="text" class="form-control"  readonly name="cy" autocomplete="off"/></td>
+                              </tr>
+                             
+                              <tr>
+                                  <td></td>
+                                  <td><span id="loader_grabar" class=""></span></td>
+                              </tr>
+                              <tr>
+                                  <td><button type="button" id="btn_actualizar" class="btn btn-success btn-sm">Actualizar</button></td>
+                                  <td><button type="button" id="btn_borrar" class="btn btn-danger btn-sm">Borrar</button></td>
+                              </tr>
+                              <tr>
+                                  <td></td>
+                                  <td><label>
+                                      <input id="opc_edicion" type="checkbox"> Habilitar Edición
+                                    </label>
+                                  </td>
+                              </tr>
+                          </table>
+                      </form>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Buscar
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <form id="formulario_buscar">
+                        <table>
+                          <TR>
+                            <td>
+                              <input type="text" id="palabra_buscar"  class="form-control" autocomplete="off" />
+                            </td>
+                            <td>
+                              <button type="button" id="btn_buscar"  class="btn btn-success btn-sm" >Buscar</button>
+                            </td>
+                          </TR>
+    
+                          <TR>
+                            <td>
+                              <select id="select_resultados">
+                                <option value="cero">Lista de resultados</option>
+                              </select>
+                            </td>
+                            <td></td>
+                          </TR>
+    
+                        </table>
+                      </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+</body>
+</html>
